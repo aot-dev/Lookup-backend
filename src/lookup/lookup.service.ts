@@ -10,13 +10,12 @@ export class LookupService {
       // Checking if ip/domain is cached
       if (query && this.cache[query] && this.isCacheValid(this.cache[query].timestamp)) {
         console.log('using cache data');
-        return { success: true, data: this.cache[query].data };
+        return this.cache[query].data ;
       }
       console.log('No catch found, will call whois api');
       const response = await axios.get(
         `https://api.whois.vu/?q=${query}`,
       );
-
       this.cache[query] = { data: response.data.whois, timestamp: Date.now() };
       return response.data.whois;
     } catch (error) {

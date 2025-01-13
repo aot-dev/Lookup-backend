@@ -26,7 +26,7 @@ describe('LookupService', () => {
     service['cache']['test-query'] = { data: cachedResponse, timestamp };
 
     const result = await service.lookup('test-query');
-    expect(result).toEqual({ success: true, data: cachedResponse });
+    expect(result).toEqual(cachedResponse);
   });
 
   it('should call axios if no cached data or cache is expired', async () => {
